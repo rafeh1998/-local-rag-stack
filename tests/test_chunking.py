@@ -29,3 +29,10 @@ def test_invalid_arguments():
         chunk_text("x", size=0)
     with pytest.raises(ValueError):
         chunk_text("x", size=10, overlap=10)
+
+
+def test_overlap_does_not_fuse_paragraphs():
+    text = "## Heading\n\n" + "x" * 30 + "\n\nAll laptops are encrypted."
+    chunks = chunk_text(text, size=40, overlap=10)
+    assert all("xAll" not in c for c in chunks)
+    assert any(c.endswith("\n\nAll laptops are encrypted.") for c in chunks)

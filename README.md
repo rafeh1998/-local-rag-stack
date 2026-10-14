@@ -83,7 +83,7 @@ system would add named-entity recognition for names and addresses.
 
 ```bash
 make dev     # create .venv and install dependencies
-make test    # 19 tests, no model server needed
+make test    # 20 tests, no model server needed
 make lint    # ruff
 ```
 

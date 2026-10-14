@@ -26,6 +26,9 @@ def chunk_text(text: str, size: int = 800, overlap: int = 100) -> list[str]:
         if current:
             chunks.append(current)
             current = current[-overlap:] if overlap else ""
+            # Keep the paragraph break so the carried overlap doesn't fuse with the next word.
+            if current and len(current) + 2 < size:
+                current += "\n\n"
         # Paragraph may itself be too long: hard-split it.
         while len(current) + len(para) > size:
             room = size - len(current)
